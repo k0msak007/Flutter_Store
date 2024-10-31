@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   final String id;
   final String fullName;
@@ -6,6 +8,7 @@ class User {
   final String city;
   final String locality;
   final String password;
+  final String token;
 
   User({
     required this.id,
@@ -15,6 +18,7 @@ class User {
     required this.city,
     required this.locality,
     required this.password,
+    required this.token,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +30,8 @@ class User {
       "city": city,
       "locality": locality,
       "password": password,
-    }
+      "token": token
+    };
   }
 
   String toJson() => json.encode(toMap());
@@ -40,8 +45,10 @@ class User {
       city: map['city'] as String? ?? '',
       locality: map['locality'] as String? ?? '',
       password: map['password'] as String? ?? '',
+      token: map['token'] as String? ?? '',
     );
   }
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory User.fromJson(String source) =>
+      User.fromMap(json.decode(source) as Map<String, dynamic>);
 }
